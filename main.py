@@ -36,7 +36,7 @@ async def on_ready():
     whitelist_channel = bot.get_channel(whitelist_channel_id)
 
     if ticket_channel:
-        file_path = r"C:\Users\fanta\Desktop\Programas\Discord\Hyperion\python\logo.png"
+        file_path = "logo.png"
         await send_ticket_menu(ticket_channel, file_path)  
     
     if whitelist_channel:
