@@ -2,7 +2,6 @@ import discord
 from discord.ext import commands
 from discord import app_commands
 import os
-import webserver
 from tickets import send_ticket_menu
 from whitelist import wl
 from bienvenidas import send_welcome_message
@@ -44,5 +43,4 @@ async def on_ready():
     else:
         print(f"Error: Canal de whitelist con ID {whitelist_channel_id} no encontrado.")
 
-webserver.keep_alive()
 bot.run(DISCORD_TOKEN)
