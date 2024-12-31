@@ -21,7 +21,7 @@ async def send_welcome_message(member):
                             avatar_bytes = await response.read()
                             avatar_image = Image.open(BytesIO(avatar_bytes))
 
-                            background = Image.open(r"C:\Users\fanta\Desktop\Programas\Discord\Hyperion\hyperion_oficial_logo.png")
+                            background = Image.open"hyperion_oficial_logo.png"
                             background = background.resize((800, 600))
 
                             avatar_image = avatar_image.resize((200, 200))
