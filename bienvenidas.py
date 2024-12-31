@@ -5,8 +5,8 @@ from PIL import Image, ImageDraw, ImageOps
 
 async def send_welcome_message(member):
     """Envía un mensaje de bienvenida y la foto de perfil a los canales especificados"""
-    welcome_channel_ids = 1322734453679980625
-    role_id = 1322741281163841568
+    welcome_channel_ids = CHANEL_ID
+    role_id = ROLE_ID
 
     for channel_id in welcome_channel_ids:
         welcome_channel = member.guild.get_channel(channel_id)
