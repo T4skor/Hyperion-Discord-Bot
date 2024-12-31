@@ -32,12 +32,7 @@ Hyperion is a versatile Discord bot designed to enhance server management and us
    pip install -r requirements.txt
    ```
 
-4. **Configure the bot**:
-
-   - Rename `config.example.py` to `config.py`.
-   - Edit `config.py` to include your Discord bot token and other necessary configurations.
-
-5. **Run the bot**:
+4. **Run the bot**:
 
    ```bash
    python main.py
