@@ -29,8 +29,8 @@ async def on_ready():
     except Exception as e:
         print(f"Error al sincronizar comandos slash: {e}")
 
-    ticket_channel_id = 1322694316019290174
-    whitelist_channel_id = 1322978279921156286
+    ticket_channel_id = CHANEL_ID
+    whitelist_channel_id = CHANEL_ID
     ticket_channel = bot.get_channel(ticket_channel_id)
     whitelist_channel = bot.get_channel(whitelist_channel_id)
 
