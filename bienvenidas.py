@@ -5,8 +5,8 @@ from PIL import Image, ImageDraw, ImageOps
 
 async def send_welcome_message(member):
     """Envía un mensaje de bienvenida y la foto de perfil a los canales especificados"""
-    welcome_channel_ids = CHANEL_ID
-    role_id = ROLE_ID
+    welcome_channel_ids = [1313876205052756050, 1319095292053815338]
+    role_id = 1322741281163841568
 
     for channel_id in welcome_channel_ids:
         welcome_channel = member.guild.get_channel(channel_id)
@@ -21,7 +21,7 @@ async def send_welcome_message(member):
                             avatar_bytes = await response.read()
                             avatar_image = Image.open(BytesIO(avatar_bytes))
 
-                            background = Image.open"hyperion_oficial_logo.png"
+                            background = Image.open("/home/container/hyperion_oficial_logo.png")
                             background = background.resize((800, 600))
 
                             avatar_image = avatar_image.resize((200, 200))
