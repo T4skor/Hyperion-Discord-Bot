@@ -13,16 +13,23 @@ async def wl(channel):
             color=discord.Color.yellow()
         )
 
+        # Enviar logo.png como archivo adjunto
+        file = discord.File("logo.png", filename="logo.png")
+
+        # Incluir la imagen en el embed
+        embed.set_image(url="attachment://logo.png")
+        
         button = Button(label="📝 Solicitar Whitelist", style=discord.ButtonStyle.primary)
 
         async def button_callback(interaction: discord.Interaction):
             try:
                 guild = interaction.guild
                 author = interaction.user
-                category = discord.utils.get(guild.categories, name="Tickets")
+                role = discord.Object(id=1319924341328187454)  # Rol que debe tener acceso a los tickets
+                category = discord.utils.get(guild.categories, name="🔒 ︴ NO WHITELIST")
 
                 if not category:
-                    category = await guild.create_category("Tickets")
+                    category = await guild.create_category("🔒 ︴ NO WHITELIST")
 
                 ticket_count["whitelist"] += 1
                 ticket_number = str(ticket_count["whitelist"]).zfill(3)
@@ -31,12 +38,14 @@ async def wl(channel):
                     if channel.name.startswith(f"ticket-{author.name.lower()}"):
                         return await interaction.response.send_message("Ya tienes un ticket abierto.", ephemeral=True)
 
+                # Crear el canal de texto con permisos específicos
                 ticket_channel = await category.create_text_channel(
                     f"ticket-{author.name.lower()}-whitelist-{ticket_number}",
                     overwrites={
-                        guild.default_role: discord.PermissionOverwrite(view_channel=False),
-                        author: discord.PermissionOverwrite(view_channel=True, send_messages=True, read_message_history=True),
-                        guild.me: discord.PermissionOverwrite(view_channel=True, send_messages=True, read_message_history=True),
+                        guild.default_role: discord.PermissionOverwrite(view_channel=False),  # Ocultar el canal para todos
+                        author: discord.PermissionOverwrite(view_channel=True, send_messages=True, read_message_history=True),  # Permitir al autor ver y escribir
+                        guild.me: discord.PermissionOverwrite(view_channel=True, send_messages=True, read_message_history=True),  # Permitir al bot acceso completo
+                        guild.get_role(role.id): discord.PermissionOverwrite(view_channel=True, send_messages=True, read_message_history=True)  # Permitir al rol acceso completo
                     }
                 )
 
@@ -76,7 +85,9 @@ async def wl(channel):
         view = View(timeout=None)
         view.add_item(button)
 
-        await channel.send(embed=embed, view=view)
+        # Enviar primero el embed, luego el archivo, y finalmente el botón
+        await channel.send(embed=embed, file=file)
+        await channel.send(view=view)
 
     except Exception as e:
         print(f"Error al enviar el mensaje: {e}")
